@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "849561337070",
+    "project_id": "medexpress-a995c",
+    "storage_bucket": "medexpress-a995c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:849561337070:android:617d5b75a19495d31007ff",
+        "android_client_info": {
+          "package_name": "com.group.medexpress"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "849561337070-ot719vub73pbp7qbh03hvrfilqubm425.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBniDp81ML3fBEG7u3GoIWUvkg3vgDsw1c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "849561337070-ot719vub73pbp7qbh03hvrfilqubm425.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
