@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class LoadingPageActivity extends AppCompatActivity {
-    private static int SPLASH_SCREEN_TIMEOUT = 3000;
+    private static int SPLASH_SCREEN_TIMEOUT = 2000;
 
 
     @Override
