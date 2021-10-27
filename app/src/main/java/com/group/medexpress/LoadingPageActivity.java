@@ -31,7 +31,7 @@ public class LoadingPageActivity extends AppCompatActivity {
         Animation fadeout = new AlphaAnimation(1, 0);
         fadeout.setInterpolator(new AccelerateInterpolator());
         fadeout.setStartOffset(500);
-        fadeout.setDuration(1800);
+        fadeout.setDuration(2000);
         imageView.setAnimation(fadeout);
         textView.setAnimation(fadeout);
         textView2.setAnimation(fadeout);
