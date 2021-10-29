@@ -4,7 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/trann/AndroidStudioProjects/Med_Express/app/src/main/res/layout/activity_loading_page.xml" value="0.22" />
+        <entry key="..\:/Users/trann/AndroidStudioProjects/Med_Express/app/src/main/res/layout/activity_log_in.xml" value="0.346875" />
         <entry key="..\:/Users/trann/AndroidStudioProjects/Med_Express/app/src/main/res/layout/activity_main.xml" value="0.1921875" />
+        <entry key="..\:/Users/trann/AndroidStudioProjects/Med_Express/app/src/main/res/layout/activity_register.xml" value="0.346875" />
       </map>
     </option>
   </component>
