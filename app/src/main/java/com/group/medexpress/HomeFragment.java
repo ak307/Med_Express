@@ -1,9 +1,11 @@
 package com.group.medexpress;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.text.Editable;
@@ -16,6 +18,8 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,13 +32,18 @@ import com.group.medexpress.ListviewAdapters.ProductsListviewAdapter;
 import com.group.medexpress.Utils.Utils;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.TestOnly;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class HomeFragment extends Fragment {
     private EditText searchInputEditText;
     private ImageButton searchBtn;
+    private ImageButton filterBtn;
+
     private ListView listView;
     private FirebaseFirestore firebaseFirestore;
     private Utils utils;
@@ -53,14 +62,19 @@ public class HomeFragment extends Fragment {
 
         searchInputEditText = (EditText) view.findViewById(R.id.searchEditText);
         searchBtn = (ImageButton) view.findViewById(R.id.searchBtn);
+        filterBtn = (ImageButton) view.findViewById(R.id.filterBtn);
+
         listView = (ListView) view.findViewById(R.id.listview);
+
 
         firebaseFirestore = FirebaseFirestore.getInstance();
         utils = new Utils();
         productsDataModelArrayList = new ArrayList<>();
 
 
+
         setSearchBtn();
+        setFilterBtn();
         retrieveProductsFromFirebase();
         setSearchBox();
 
@@ -76,6 +90,17 @@ public class HomeFragment extends Fragment {
                 if (!TextUtils.isEmpty(inputText)){
                     retrieveCustomerSearch(inputText);
                 }
+            }
+        });
+    }
+
+
+    private void setFilterBtn(){
+        filterBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), FilterActivity.class);
+                startActivityForResult(intent, 101);
             }
         });
     }
@@ -99,9 +124,7 @@ public class HomeFragment extends Fragment {
                                 String productID = document.getString("id");
                                 String productImg = document.getString("image_url");
 
-
                                 productsDataModelArrayList.add(new ProductsDataModel(productID, productName, price, quantity, productImg));
-
                             }
 
                             setListViewAdapter();
@@ -132,7 +155,6 @@ public class HomeFragment extends Fragment {
                 else {
 
                 }
-
             }
         });
     }
@@ -141,8 +163,6 @@ public class HomeFragment extends Fragment {
 
 
     private void retrieveProductsFromFirebase(){
-        productsDataModelArrayList.clear();
-
         firebaseFirestore
                 .collection("Products")
                 .get()
@@ -150,6 +170,7 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+                            productsDataModelArrayList.clear();
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                String productName = document.getString("name");
                                String price = document.getString("price");
@@ -173,6 +194,51 @@ public class HomeFragment extends Fragment {
         ProductsListviewAdapter adapter = new ProductsListviewAdapter(getContext(), productsDataModelArrayList);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 101){
+            ArrayList<String> selectedChips = data.getStringArrayListExtra("selectedChipData");
+
+            if (selectedChips != null && selectedChips.size() != 0 && !selectedChips.get(0).equals("~")){
+                retrieveProductsWithFilter(selectedChips);
+            }
+        }
+    }
+
+
+    private void retrieveProductsWithFilter(ArrayList<String> dataList){
+        productsDataModelArrayList.clear();
+        firebaseFirestore
+                .collection("Products")
+                .whereArrayContainsAny("Category", dataList)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                           List<DocumentSnapshot> docs = task.getResult().getDocuments();
+                           for (DocumentSnapshot doc: docs){
+                               String productName = doc.getString("name");
+                               String price = doc.getString("price");
+                               String quantity = doc.getString("stock");
+                               String productID = doc.getString("id");
+                               String productImg = doc.getString("image_url");
+
+
+                               productsDataModelArrayList.add(new ProductsDataModel(productID, productName, price, quantity, productImg));
+
+                           }
+
+                           setListViewAdapter();
+                        }
+                    }
+                });
+
     }
 
 
