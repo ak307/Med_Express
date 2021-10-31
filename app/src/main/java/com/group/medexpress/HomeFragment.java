@@ -29,6 +29,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.group.medexpress.Datamodels.ProductsDataModel;
 import com.group.medexpress.ListviewAdapters.ProductsListviewAdapter;
+import com.group.medexpress.Utils.Checker;
 import com.group.medexpress.Utils.Utils;
 
 import org.jetbrains.annotations.NotNull;
@@ -48,6 +49,8 @@ public class HomeFragment extends Fragment {
     private FirebaseFirestore firebaseFirestore;
     private Utils utils;
     private ArrayList<ProductsDataModel> productsDataModelArrayList;
+    private Checker checker;
+    private AdminInfoDatabaseHelper adminInfoDatabaseHelper;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -68,8 +71,22 @@ public class HomeFragment extends Fragment {
 
 
         firebaseFirestore = FirebaseFirestore.getInstance();
+        adminInfoDatabaseHelper = new AdminInfoDatabaseHelper(getContext()) ;
         utils = new Utils();
         productsDataModelArrayList = new ArrayList<>();
+
+
+        checker = new Checker(getContext());
+
+        if (checker.isAdmin()){
+           // you are admin
+            // do something
+
+        }
+        else {
+            // you are not admin
+            // do something
+        }
 
 
 
@@ -77,19 +94,48 @@ public class HomeFragment extends Fragment {
         setFilterBtn();
         retrieveProductsFromFirebase();
         setSearchBox();
+        checkAdmin();
 
         return view;
     }
+
+
+    public void checkAdmin(){
+        firebaseFirestore
+                .collection("Admins")
+                .whereEqualTo("id", utils.getUserID())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            QuerySnapshot documentSnapshots = task.getResult();
+                            List<DocumentSnapshot> docs = documentSnapshots.getDocuments();
+                            if (!docs.isEmpty()) {
+                                for (DocumentSnapshot doc : docs){
+                                    String id = doc.getString("id");
+                                    adminInfoDatabaseHelper.addData(id);
+                                }
+                            }
+                        }
+                    }
+                });
+
+    }
+
 
 
     private void setSearchBtn(){
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String inputText = searchInputEditText.getText().toString().trim();
-                if (!TextUtils.isEmpty(inputText)){
-                    retrieveCustomerSearch(inputText);
-                }
+                Intent intent = new Intent(getContext(), LogInActivity.class);
+                startActivity(intent);
+
+//                String inputText = searchInputEditText.getText().toString().trim();
+//                if (!TextUtils.isEmpty(inputText)){
+//                    retrieveCustomerSearch(inputText);
+//                }
             }
         });
     }
