@@ -129,13 +129,10 @@ public class HomeFragment extends Fragment {
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), LogInActivity.class);
-                startActivity(intent);
-
-//                String inputText = searchInputEditText.getText().toString().trim();
-//                if (!TextUtils.isEmpty(inputText)){
-//                    retrieveCustomerSearch(inputText);
-//                }
+                String inputText = searchInputEditText.getText().toString().trim();
+                if (!TextUtils.isEmpty(inputText)){
+                    retrieveCustomerSearch(inputText);
+                }
             }
         });
     }
