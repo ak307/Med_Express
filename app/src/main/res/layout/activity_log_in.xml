@@ -17,8 +17,8 @@
         android:layout_marginEnd="16dp"
         android:paddingStart="8dp"
         android:text="error"
-        android:visibility="invisible"
         android:textColor="@color/red"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
@@ -59,6 +59,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="16dp"
+        android:background="@drawable/round_border"
         android:fontFamily="serif"
         android:hint="Your email"
         android:padding="15dp"
@@ -67,8 +68,7 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6"
-        android:background="@drawable/round_border"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <EditText
         android:id="@+id/passwordEditText"
@@ -77,14 +77,14 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:background="@drawable/round_border"
         android:fontFamily="serif"
         android:hint="Your password"
         android:inputType="numberPassword"
+        android:padding="15dp"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         android:textSize="16sp"
-        android:padding="15dp"
-        android:background="@drawable/round_border"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -98,11 +98,11 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="100dp"
+        android:background="@drawable/round_border"
         android:paddingStart="8sp"
         android:paddingEnd="15sp"
         android:text="LOGIN"
         android:textColor="@color/black"
-        android:background="@drawable/round_border"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordEditText" />
@@ -141,17 +141,26 @@
 
     </LinearLayout>
 
+    <ImageButton
+        android:id="@+id/backBtn"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ProgressBar
         android:id="@+id/registerPageProgerssBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:elevation="10dp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="invisible"/>
-
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

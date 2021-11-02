@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -25,6 +26,7 @@ public class LogInActivity extends AppCompatActivity {
     private TextView registerNowBtn;
     private ProgressBar progressBar;
     private TextView errorText;
+    private ImageButton backBtn;
     private FirebaseAuth auth;
 
     @Override
@@ -39,11 +41,13 @@ public class LogInActivity extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.registerPageProgerssBar);
         errorText = (TextView)  findViewById(R.id.loginErrorText);
 
+        backBtn = (ImageButton) findViewById(R.id.backBtn);
 
         auth = FirebaseAuth.getInstance();
 
         setLoginBtn();
         setRegisterNowBtn();
+        setBackBtn();
 
 
     }
@@ -124,4 +128,14 @@ public class LogInActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+    private void setBackBtn(){
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendToMainActivity();
+            }
+        });
+    }
+
 }
