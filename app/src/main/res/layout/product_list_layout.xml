@@ -12,7 +12,7 @@
         android:layout_margin="4dp"
         android:descendantFocusability="blocksDescendants"
         android:padding="6dp"
-        android:background="@color/grey">
+        android:background="@color/white">
 
 
         <ImageView
@@ -70,15 +70,16 @@
 
             <ImageButton
                 android:id="@+id/updateBtn"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/ic_update_24"/>
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/edit"/>
 
             <ImageButton
                 android:id="@+id/deleteBtn"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/ic_delete_24"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/trashcan"
+                android:layout_marginTop="10dp"
                 />
 
 
