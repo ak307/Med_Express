@@ -54,6 +54,17 @@
             android:backgroundTint="@color/blue"/>
 
 
+        <ImageButton
+            android:id="@+id/createProductBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/ic_filter_24"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_create_24"
+            android:backgroundTint="@color/blue"
+            />
+
     </LinearLayout>
 
     <LinearLayout

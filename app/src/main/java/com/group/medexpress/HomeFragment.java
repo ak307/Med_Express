@@ -44,7 +44,7 @@ public class HomeFragment extends Fragment {
     private EditText searchInputEditText;
     private ImageButton searchBtn;
     private ImageButton filterBtn;
-
+    private ImageButton createBtn;
     private ListView listView;
     private FirebaseFirestore firebaseFirestore;
     private Utils utils;
@@ -66,6 +66,7 @@ public class HomeFragment extends Fragment {
         searchInputEditText = (EditText) view.findViewById(R.id.searchEditText);
         searchBtn = (ImageButton) view.findViewById(R.id.searchBtn);
         filterBtn = (ImageButton) view.findViewById(R.id.filterBtn);
+        createBtn = (ImageButton) view.findViewById(R.id.createProductBtn);
 
         listView = (ListView) view.findViewById(R.id.listview);
 
@@ -78,15 +79,10 @@ public class HomeFragment extends Fragment {
 
         checker = new Checker(getContext());
 
-        if (checker.isAdmin()){
-           // you are admin
-            // do something
+        if (!checker.isAdmin())
+           createBtn.setVisibility(View.GONE);
 
-        }
-        else {
-            // you are not admin
-            // do something
-        }
+
 
 
 

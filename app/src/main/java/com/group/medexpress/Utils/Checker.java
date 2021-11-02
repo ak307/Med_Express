@@ -32,8 +32,13 @@ public class Checker {
             do {
                 String id = data.getString(1);
                 if (id != null && !id.equals("")){
-                    if (utils.getUserID().equals(id)){
-                        return true;
+                    if (utils.getUserID() == null){
+                        return false;
+                    }
+                    else {
+                        if (utils.getUserID().equals(id)){
+                            return true;
+                        }
                     }
                 }
             } while (data.moveToNext());
