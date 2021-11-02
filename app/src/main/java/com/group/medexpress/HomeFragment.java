@@ -91,8 +91,20 @@ public class HomeFragment extends Fragment {
         retrieveProductsFromFirebase();
         setSearchBox();
         checkAdmin();
+        setCreateBtn();
 
         return view;
+    }
+    
+    
+    private void setCreateBtn(){
+        createBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), CreateProductActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
