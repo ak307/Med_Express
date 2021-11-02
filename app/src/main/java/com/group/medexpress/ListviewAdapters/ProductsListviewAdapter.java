@@ -13,12 +13,14 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.group.medexpress.Datamodels.ProductsDataModel;
 import com.group.medexpress.R;
+import com.group.medexpress.Utils.Checker;
 
 import java.util.ArrayList;
 
 public class ProductsListviewAdapter extends BaseAdapter {
     private Context context;
     private  ArrayList<ProductsDataModel> list;
+    private Checker checker;
 
     public ProductsListviewAdapter(Context context, ArrayList<ProductsDataModel> list) {
         this.context = context;
@@ -54,6 +56,11 @@ public class ProductsListviewAdapter extends BaseAdapter {
         ImageView productImg = (ImageView) convertView.findViewById(R.id.productImageView);
         TextView productName = (TextView) convertView.findViewById(R.id.productNameTextView);
         TextView price = (TextView) convertView.findViewById(R.id.productPriceTextview);
+        ImageButton updateBtn = (ImageButton) convertView.findViewById(R.id.updateBtn);
+        ImageButton deleteBtn = (ImageButton) convertView.findViewById(R.id.deleteBtn);
+
+        checker = new Checker(context);
+
 
 
         Uri imageUrl = Uri.parse(list.get(position).getProductImage());
@@ -64,6 +71,12 @@ public class ProductsListviewAdapter extends BaseAdapter {
             Glide.with(context.getApplicationContext())
                     .load(imageUrl)
                     .into(productImg);
+        }
+
+
+        if (!checker.isAdmin()){
+            updateBtn.setVisibility(View.GONE);
+            deleteBtn.setVisibility(View.GONE);
         }
 
 

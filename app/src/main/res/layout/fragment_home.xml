@@ -54,6 +54,15 @@
             android:backgroundTint="@color/blue"/>
 
 
+        <ImageButton
+            android:id="@+id/createProductBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="8dp"
+            android:layout_gravity="center"
+            android:background="@drawable/add"
+            />
+
     </LinearLayout>
 
     <LinearLayout
