@@ -155,6 +155,11 @@ public class CreateProductActivity extends AppCompatActivity {
         });
     }
 
+    private void test(){
+        //can delete
+    }
+
+
 
     private void setImageToFirebaseStorage(String productID,
                                            String productName, String price,
