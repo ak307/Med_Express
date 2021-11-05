@@ -1,6 +1,7 @@
 package com.group.medexpress.ListviewAdapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +12,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.group.medexpress.CreateProductActivity;
 import com.group.medexpress.Datamodels.ProductsDataModel;
+import com.group.medexpress.DeleteProductActivity;
 import com.group.medexpress.R;
+import com.group.medexpress.UpdateProductActivity;
 import com.group.medexpress.Utils.Checker;
 
 import java.util.ArrayList;
@@ -79,9 +83,31 @@ public class ProductsListviewAdapter extends BaseAdapter {
             deleteBtn.setVisibility(View.GONE);
         }
 
-
+        setUpdateBtn(updateBtn);
+        setDeleteBtn(deleteBtn);
 
         return convertView;
     }
+
+    private void setUpdateBtn(ImageButton updateBtn){
+        updateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, UpdateProductActivity.class);
+                context.startActivity(intent);
+            }
+        });
+    }
+
+    private void setDeleteBtn(ImageButton deleteBtn){
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, DeleteProductActivity.class);
+                context.startActivity(intent);
+            }
+        });
+    }
+
 
 }

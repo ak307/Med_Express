@@ -54,10 +54,8 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
 
-    // firbase for android 11
+    // firebase for android 11
     implementation "io.grpc:grpc-okhttp:1.32.2"
-
-
 
 
 }

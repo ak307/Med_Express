@@ -2,6 +2,7 @@ package com.group.medexpress;
 
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -82,10 +83,6 @@ public class HomeFragment extends Fragment {
         if (!checker.isAdmin())
            createBtn.setVisibility(View.GONE);
 
-
-
-
-
         setSearchBtn();
         setFilterBtn();
         retrieveProductsFromFirebase();
@@ -95,8 +92,7 @@ public class HomeFragment extends Fragment {
 
         return view;
     }
-    
-    
+
     private void setCreateBtn(){
         createBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,7 +102,6 @@ public class HomeFragment extends Fragment {
             }
         });
     }
-
 
     public void checkAdmin(){
         firebaseFirestore

@@ -133,7 +133,7 @@ public class LogInActivity extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendToMainActivity();
+                onBackPressed();
             }
         });
     }

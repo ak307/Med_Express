@@ -30,7 +30,7 @@
 
             <ImageButton
                 android:id="@+id/createProductBackBtn"
-                android:layout_width="49dp"
+                android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="8dp"
                 android:background="@drawable/xbtn" />
@@ -42,7 +42,7 @@
                 android:layout_marginLeft="24dp"
                 android:layout_weight="0.8"
                 android:fontFamily="serif"
-                android:text="Create a product"
+                android:text="Update the product"
                 android:textColor="@color/black"
                 android:textSize="20dp"
                 android:textStyle="bold" />
