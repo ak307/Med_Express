@@ -1,21 +1,27 @@
 package com.group.medexpress.Datamodels;
 
 public class ProductsDataModel {
+    private String ProductDocID;
     private String productID;
     private String productName;
     private String productPrice;
     private String quantityInStock;
     private String productImage;
+    private String productDesc;
 
 
-    public ProductsDataModel(String productID, String productName,
-                             String productPrice, String quantityInStock,
-                             String productImage) {
+
+
+    public ProductsDataModel(String productDocID, String productID, String productName,
+                             String productPrice, String quantityInStock, String productImage,
+                             String productDesc) {
+        ProductDocID = productDocID;
         this.productID = productID;
         this.productName = productName;
         this.productPrice = productPrice;
         this.quantityInStock = quantityInStock;
         this.productImage = productImage;
+        this.productDesc = productDesc;
     }
 
     public String getProductID() {
@@ -56,5 +62,21 @@ public class ProductsDataModel {
 
     public void setProductImage(String productImage) {
         this.productImage = productImage;
+    }
+
+    public String getProductDocID() {
+        return ProductDocID;
+    }
+
+    public void setProductDocID(String productDocID) {
+        ProductDocID = productDocID;
+    }
+
+    public String getProductDesc() {
+        return productDesc;
+    }
+
+    public void setProductDesc(String productDesc) {
+        this.productDesc = productDesc;
     }
 }

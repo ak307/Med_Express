@@ -26,9 +26,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -46,7 +43,7 @@ public class UpdateProductActivity extends AppCompatActivity {
     private ImageButton cancelBtn;
     private ImageButton updateBtn;
     private ImageView productImgView;
-    private EditText productIDField;
+    private TextView productIDField;
     private EditText productNameField;
     private EditText productPriceField;
     private EditText productDescField;
@@ -65,20 +62,22 @@ public class UpdateProductActivity extends AppCompatActivity {
         setContentView(R.layout.activity_update_product);
 
 
-        cancelBtn = (ImageButton) findViewById(R.id.createProductBackBtn);
-        updateBtn = (ImageButton) findViewById(R.id.updateBtn);
-        productImgView = (ImageView) findViewById(R.id.createProductImgView);
-        productIDField = (EditText) findViewById(R.id.createProductProductID);
-        productNameField = (EditText) findViewById(R.id.createProductProductName);
-        productPriceField = (EditText) findViewById(R.id.createProductProductPrice);
-        productDescField = (EditText) findViewById(R.id.createProductProductDescription);
-        error = (TextView) findViewById(R.id.createProductErrorText);
-        progressBar = (ProgressBar) findViewById(R.id.createProductProgressBar);
-        dropDown = (Spinner) findViewById(R.id.createProductDropDown);
+        cancelBtn = (ImageButton) findViewById(R.id.updateProductBackBtn);
+        updateBtn = (ImageButton) findViewById(R.id.updateProductBtn);
+        productImgView = (ImageView) findViewById(R.id.updateProductImgView);
+        productIDField = (TextView) findViewById(R.id.updateProductProductID);
+        productNameField = (EditText) findViewById(R.id.updateProductProductName);
+        productPriceField = (EditText) findViewById(R.id.updateProductProductPrice);
+        productDescField = (EditText) findViewById(R.id.updateProductProductDescription);
+        error = (TextView) findViewById(R.id.updateProductErrorText);
+        progressBar = (ProgressBar) findViewById(R.id.updateProductProgressBar);
+        dropDown = (Spinner) findViewById(R.id.updateProductDropDown);
 
 
         error.setVisibility(View.INVISIBLE);
         progressBar.setVisibility(View.INVISIBLE);
+
+
         String[] items = new String[]{"surgical ", "alcohol", "test kit"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         //set the spinners adapter to the previously created one.
@@ -93,9 +92,27 @@ public class UpdateProductActivity extends AppCompatActivity {
         setCancelBtn();
         setUpdateBtn();
         setProductImgView();
+        setOldProductFields();
 
 
     }
+
+
+    private void setOldProductFields(){
+        productIDField.setText(getProductID());
+
+        if (!getProductImg().equals("")) {
+            Glide.with(getApplicationContext())
+                    .load(getProductImg())
+                    .into(productImgView);
+        }
+
+        productNameField.setText(getProductName());
+        productPriceField.setText(getProductPrice());
+        productDescField.setText(getProductDesc());
+
+    }
+
 
     private void setCancelBtn(){
         cancelBtn.setOnClickListener(new View.OnClickListener() {
@@ -142,9 +159,10 @@ public class UpdateProductActivity extends AppCompatActivity {
                     error.setVisibility(View.VISIBLE);
                     error.setText("Add Product Description");
                 }
-                else if (uri == null || uri.equals("")){
-                    error.setVisibility(View.VISIBLE);
-                    error.setText("Add Product Image");
+                else if (uri == null){
+                    error.setVisibility(View.INVISIBLE);
+                    progressBar.setVisibility(View.VISIBLE);
+                    addProductToFirebase(getProductImg(), productID, productName, price, desc, dropdown);
                 }
                 else {
                     error.setVisibility(View.INVISIBLE);
@@ -161,28 +179,31 @@ public class UpdateProductActivity extends AppCompatActivity {
 
 
 
+
+
     private void setImageToFirebaseStorage(String productID,
                                            String productName, String price,
                                            String desc, String dropdown){
 
-        String timestamp = "" + System.currentTimeMillis();
-        String  filePathAndName  = "Product_image/" + "img_" + timestamp;
+            String timestamp = "" + System.currentTimeMillis();
+            String filePathAndName = "Product_image/" + "img_" + timestamp;
 
 
-        StorageReference storageReference = firebaseStorage.getReference(filePathAndName);
+            StorageReference storageReference = firebaseStorage.getReference(filePathAndName);
 
-        storageReference.putFile(uri)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        getImageUrl(storageReference, productID, productName, price, desc, dropdown);
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull @NotNull Exception e) {
-                progressBar.setVisibility(View.INVISIBLE);
-            }
-        });
+            storageReference.putFile(uri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            getImageUrl(storageReference, productID, productName, price, desc, dropdown);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull @NotNull Exception e) {
+                    progressBar.setVisibility(View.INVISIBLE);
+                }
+            });
+
     }
 
 
@@ -199,23 +220,34 @@ public class UpdateProductActivity extends AppCompatActivity {
     }
 
 
-    private void addProductToFirebase(String Uri, String productID,
+    private void addProductToFirebase(String uri, String productID,
                                       String productName, String price,
                                       String desc, String dropdown){
         categoriesList.add(dropdown);
 
-        String docId = firebaseFirestore.collection("Products")
-                .document().getId();
-
 
         HashMap<String, Object> dataMap = new HashMap<>();
-        dataMap.put("id", docId);
-        dataMap.put("productID", productID);
+        dataMap.put("id", getProductDocID());
+        dataMap.put("productID", getProductID());
         dataMap.put("name", productName);
         dataMap.put("price", price);
         dataMap.put("description", desc);
-        dataMap.put("image_url", Uri);
+        dataMap.put("image_url", uri);
         dataMap.put("Category", categoriesList);
+
+
+
+        firebaseFirestore.collection("Products")
+                .document(getProductDocID())
+                .update(dataMap)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()){
+                            onBackPressed();
+                        }
+                    }
+                });
 
 //        firebaseStorage.getReference().addValueEventListener(new ValueEventListener(){
 //
@@ -309,6 +341,37 @@ public class UpdateProductActivity extends AppCompatActivity {
         }
     }
 
+
+    private String getProductDocID(){
+        String productDocID = getIntent().getStringExtra("productDocID");
+        return productDocID;
+    }
+
+
+    private String getProductID(){
+        String productID = getIntent().getStringExtra("productID");
+        return productID;
+    }
+
+    private String getProductName(){
+        String productID = getIntent().getStringExtra("productName");
+        return productID;
+    }
+
+    private String getProductPrice(){
+        String productID = getIntent().getStringExtra("productPrice");
+        return productID;
+    }
+
+    private String getProductDesc(){
+        String productID = getIntent().getStringExtra("productDesc");
+        return productID;
+    }
+
+    private String getProductImg(){
+        String productID = getIntent().getStringExtra("productImg");
+        return productID;
+    }
 
 }
 

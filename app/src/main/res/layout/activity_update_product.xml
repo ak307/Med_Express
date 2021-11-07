@@ -29,7 +29,7 @@
 
 
             <ImageButton
-                android:id="@+id/createProductBackBtn"
+                android:id="@+id/updateProductBackBtn"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="8dp"
@@ -49,7 +49,7 @@
 
 
             <ImageButton
-                android:id="@+id/createProductCreateBtn"
+                android:id="@+id/updateProductBtn"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="60dp"
@@ -72,14 +72,14 @@
 
 
             <ImageView
-                android:id="@+id/createProductImgView"
+                android:id="@+id/updateProductImgView"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_margin="16dp"
                 android:src="@drawable/android_24" />
 
-            <EditText
-                android:id="@+id/createProductProductID"
+            <TextView
+                android:id="@+id/updateProductProductID"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -102,7 +102,7 @@
 
 
             <EditText
-                android:id="@+id/createProductProductName"
+                android:id="@+id/updateProductProductName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -116,7 +116,7 @@
 
 
             <EditText
-                android:id="@+id/createProductProductPrice"
+                android:id="@+id/updateProductProductPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -131,7 +131,7 @@
 
 
             <Spinner
-                android:id="@+id/createProductDropDown"
+                android:id="@+id/updateProductDropDown"
                 android:layout_width="wrap_content"
                 android:layout_height="50sp"
                 android:background="@android:drawable/btn_dropdown"
@@ -140,7 +140,7 @@
 
 
             <EditText
-                android:id="@+id/createProductProductDescription"
+                android:id="@+id/updateProductProductDescription"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_gravity="center"
@@ -155,7 +155,7 @@
 
 
             <TextView
-                android:id="@+id/createProductErrorText"
+                android:id="@+id/updateProductErrorText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
@@ -172,7 +172,7 @@
 
 
     <ProgressBar
-        android:id="@+id/createProductProgressBar"
+        android:id="@+id/updateProductProgressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"

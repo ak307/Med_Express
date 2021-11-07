@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.group.medexpress.CreateProductActivity;
@@ -83,27 +84,36 @@ public class ProductsListviewAdapter extends BaseAdapter {
             deleteBtn.setVisibility(View.GONE);
         }
 
-        setUpdateBtn(updateBtn);
-        setDeleteBtn(deleteBtn);
+        setUpdateBtn(updateBtn, position);
+        setDeleteBtn(deleteBtn, position);
+
 
         return convertView;
     }
 
-    private void setUpdateBtn(ImageButton updateBtn){
+    private void setUpdateBtn(ImageButton updateBtn, int position){
         updateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, UpdateProductActivity.class);
+                intent.putExtra("productDocID", list.get(position).getProductDocID());
+                intent.putExtra("productID", list.get(position).getProductID());
+                intent.putExtra("productName", list.get(position).getProductName());
+                intent.putExtra("productPrice", list.get(position).getProductPrice());
+                intent.putExtra("productDesc", list.get(position).getProductDesc());
+                intent.putExtra("productImg", list.get(position).getProductImage());
                 context.startActivity(intent);
             }
         });
     }
 
-    private void setDeleteBtn(ImageButton deleteBtn){
+    private void setDeleteBtn(ImageButton deleteBtn, int position){
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, DeleteProductActivity.class);
+                intent.putExtra("productDocID", list.get(position).getProductDocID());
+
                 context.startActivity(intent);
             }
         });
