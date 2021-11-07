@@ -26,10 +26,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.group.medexpress.Datamodels.ProductsDataModel;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -40,7 +44,7 @@ import java.util.HashMap;
 
 public class UpdateProductActivity extends AppCompatActivity {
     private ImageButton cancelBtn;
-    private ImageButton createBtn;
+    private ImageButton updateBtn;
     private ImageView productImgView;
     private EditText productIDField;
     private EditText productNameField;
@@ -62,7 +66,7 @@ public class UpdateProductActivity extends AppCompatActivity {
 
 
         cancelBtn = (ImageButton) findViewById(R.id.createProductBackBtn);
-        createBtn = (ImageButton) findViewById(R.id.createProductCreateBtn);
+        updateBtn = (ImageButton) findViewById(R.id.updateBtn);
         productImgView = (ImageView) findViewById(R.id.createProductImgView);
         productIDField = (EditText) findViewById(R.id.createProductProductID);
         productNameField = (EditText) findViewById(R.id.createProductProductName);
@@ -86,12 +90,9 @@ public class UpdateProductActivity extends AppCompatActivity {
         categoriesList = new ArrayList<>();
 
 
-
         setCancelBtn();
-        setCreateBtn();
+        setUpdateBtn();
         setProductImgView();
-
-
 
 
     }
@@ -106,8 +107,8 @@ public class UpdateProductActivity extends AppCompatActivity {
     }
 
 
-    private void setCreateBtn(){
-        createBtn.setOnClickListener(new View.OnClickListener() {
+    private void setUpdateBtn(){
+        updateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String productID = productIDField.getText().toString().trim();
@@ -216,20 +217,33 @@ public class UpdateProductActivity extends AppCompatActivity {
         dataMap.put("image_url", Uri);
         dataMap.put("Category", categoriesList);
 
-        firebaseFirestore.collection("Products")
-                .document(docId)
-                .set(dataMap)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-                            onBackPressed();
-                        }
-                        else
-                            progressBar.setVisibility(View.INVISIBLE);
+//        firebaseStorage.getReference().addValueEventListener(new ValueEventListener(){
+//
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                progressBar.setVisibility(View.GONE);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        })
 
-                    }
-                });
+//        firebaseFirestore.collection("Products")
+//                .document(docId)
+//                .set(dataMap)
+//                .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<Void> task) {
+//                        if(task.isSuccessful()){
+//                            onBackPressed();
+//                        }
+//                        else
+//                            progressBar.setVisibility(View.INVISIBLE);
+//
+//                    }
+//                });
 
     }
 
