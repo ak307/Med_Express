@@ -17,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MedExpress">
         <activity
+            android:name=".DetailedProductActivity"
+            android:exported="false" />
+        <activity
             android:name=".DeleteProductActivity"
             android:exported="false" />
         <activity android:name=".CreateProductActivity" />

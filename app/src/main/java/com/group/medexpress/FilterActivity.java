@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 
 import com.google.android.material.chip.Chip;
 
@@ -16,6 +17,7 @@ public class FilterActivity extends AppCompatActivity {
     private Chip surgical, alcohol, testKit;
     private Button applyBtn;
     private ArrayList<String> selectedChips;
+    private ImageButton filterBackBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +30,11 @@ public class FilterActivity extends AppCompatActivity {
         testKit = (Chip) findViewById(R.id.testKitChip);
         applyBtn = (Button) findViewById(R.id.filterApplyBtn);
 
+        filterBackBtn = (ImageButton) findViewById(R.id.filterBackBtn);
+
         selectedChips = new ArrayList<>();
+
+        setFilterBackBtn();
 
 
         CompoundButton.OnCheckedChangeListener checkedChangeListener = new CompoundButton.OnCheckedChangeListener() {
@@ -68,4 +74,14 @@ public class FilterActivity extends AppCompatActivity {
         super.onBackPressed();
 
     }
+
+    private void setFilterBackBtn(){
+        filterBackBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+    }
+
 }
