@@ -1,7 +1,10 @@
 package com.group.medexpress;
 
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -24,7 +27,9 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.group.medexpress.Datamodels.ProductsDataModel;
@@ -82,19 +87,25 @@ public class HomeFragment extends Fragment {
         if (!checker.isAdmin())
            createBtn.setVisibility(View.GONE);
 
-
-
-
-
         setSearchBtn();
         setFilterBtn();
         retrieveProductsFromFirebase();
         setSearchBox();
         checkAdmin();
+        setCreateBtn();
 
         return view;
     }
 
+    private void setCreateBtn(){
+        createBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), CreateProductActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
 
     public void checkAdmin(){
         firebaseFirestore
@@ -160,10 +171,13 @@ public class HomeFragment extends Fragment {
                                 String productName = document.getString("name");
                                 String price = document.getString("price");
                                 String quantity = document.getString("stock");
-                                String productID = document.getString("id");
+                                String productDocID = document.getString("id");
+                                String productID = document.getString("productID");
                                 String productImg = document.getString("image_url");
+                                String description = document.getString("description");
 
-                                productsDataModelArrayList.add(new ProductsDataModel(productID, productName, price, quantity, productImg));
+
+                                productsDataModelArrayList.add(new ProductsDataModel(productDocID, productID, productName, price, quantity, productImg, description));
                             }
 
                             setListViewAdapter();
@@ -204,25 +218,35 @@ public class HomeFragment extends Fragment {
     private void retrieveProductsFromFirebase(){
         firebaseFirestore
                 .collection("Products")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
-                    public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        if (error != null) {
+                            Log.w(TAG, "Listen failed.", error);
+                            return;
+                        }
+
+                        if (value != null && !value.isEmpty()) {
+                            List<DocumentSnapshot> data = value.getDocuments();
                             productsDataModelArrayList.clear();
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                               String productName = document.getString("name");
-                               String price = document.getString("price");
-                               String quantity = document.getString("stock");
-                               String productID = document.getString("id");
-                               String productImg = document.getString("image_url");
+                            for (DocumentSnapshot document : data) {
+                                String productName = document.getString("name");
+                                String price = document.getString("price");
+                                String quantity = document.getString("stock");
+                                String productDocID = document.getString("id");
+                                String productID = document.getString("productID");
+                                String productImg = document.getString("image_url");
+                                String description = document.getString("description");
 
 
-                               productsDataModelArrayList.add(new ProductsDataModel(productID, productName, price, quantity, productImg));
+
+
+                                productsDataModelArrayList.add(new ProductsDataModel(productDocID, productID, productName, price, quantity, productImg, description));
 
                             }
 
                             setListViewAdapter();
+
                         }
                     }
                 });
@@ -265,11 +289,14 @@ public class HomeFragment extends Fragment {
                                String productName = doc.getString("name");
                                String price = doc.getString("price");
                                String quantity = doc.getString("stock");
-                               String productID = doc.getString("id");
+                               String productDocID = doc.getString("id");
                                String productImg = doc.getString("image_url");
+                               String productID = doc.getString("productID");
+                               String description = doc.getString("description");
 
 
-                               productsDataModelArrayList.add(new ProductsDataModel(productID, productName, price, quantity, productImg));
+
+                               productsDataModelArrayList.add(new ProductsDataModel(productDocID, productID, productName, price, quantity, productImg, description));
 
                            }
 
@@ -279,6 +306,7 @@ public class HomeFragment extends Fragment {
                 });
 
     }
+
 
 
 
