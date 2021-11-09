@@ -1,5 +1,6 @@
 package com.group.medexpress.ListviewAdapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,7 +18,11 @@ import com.bumptech.glide.Glide;
 import com.group.medexpress.CreateProductActivity;
 import com.group.medexpress.Datamodels.ProductsDataModel;
 import com.group.medexpress.DeleteProductActivity;
+import com.group.medexpress.DetailedProductActivity;
+import com.group.medexpress.LogInActivity;
+import com.group.medexpress.MainActivity;
 import com.group.medexpress.R;
+import com.group.medexpress.RegisterActivity;
 import com.group.medexpress.UpdateProductActivity;
 import com.group.medexpress.Utils.Checker;
 
@@ -31,7 +37,6 @@ public class ProductsListviewAdapter extends BaseAdapter {
         this.context = context;
         this.list = list;
     }
-
 
 
     @Override
@@ -118,6 +123,5 @@ public class ProductsListviewAdapter extends BaseAdapter {
             }
         });
     }
-
 
 }
