@@ -4,7 +4,7 @@ package com.group.medexpress;
 import static android.content.ContentValues.TAG;
 
 import android.content.Intent;
-import android.media.Image;
+import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,7 +22,6 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -35,13 +34,12 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.group.medexpress.Datamodels.ProductsDataModel;
 import com.group.medexpress.ListviewAdapters.ProductsListviewAdapter;
+import com.group.medexpress.SQLite.AdminInfoDatabaseHelper;
 import com.group.medexpress.Utils.Checker;
 import com.group.medexpress.Utils.Utils;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.TestOnly;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -97,8 +95,43 @@ public class HomeFragment extends Fragment {
 
         setDetailedMove();
 
+
+//        CartDatabaseHelper cartDatabaseHelper = new CartDatabaseHelper(getContext());
+//
+//        cartDatabaseHelper.deleteAll();
+//
+//        cartDatabaseHelper.addProduct("0000000000");
+//        cartDatabaseHelper.addProduct("111111");
+//        cartDatabaseHelper.addProduct("222222");
+//
+//        getClassCode(cartDatabaseHelper);
+
         return view;
     }
+
+
+
+//    private ArrayList<String> getClassCode(CartDatabaseHelper cartDatabaseHelper){
+//        ArrayList<String> classCodeList = new ArrayList<>();
+//        Cursor data = cartDatabaseHelper.getData();
+//
+//        if (data.moveToFirst()) {
+//            do {
+//                String code = data.getString(1);
+//                classCodeList.add(code);
+//
+//            } while (data.moveToNext());
+//        }
+//
+//        Toast.makeText(getContext(), "d" + classCodeList.get(0), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), "d" + classCodeList.get(1), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), "d" + classCodeList.get(2), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), "d" + classCodeList.size(), Toast.LENGTH_SHORT).show();
+//
+//        return classCodeList;
+//    }
+
+
 
     private void setCreateBtn(){
         createBtn.setOnClickListener(new View.OnClickListener() {
@@ -314,13 +347,19 @@ public class HomeFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                sendToDetailedProductActivity();
+                sendToDetailedProductActivity(position);
             }
         });
     }
 
-    private void sendToDetailedProductActivity(){
+    private void sendToDetailedProductActivity(int position){
         Intent intent = new Intent(getContext(), DetailedProductActivity.class);
+        intent.putExtra("productDocID", productsDataModelArrayList.get(position).getProductDocID());
+        intent.putExtra("productID", productsDataModelArrayList.get(position).getProductID());
+        intent.putExtra("productName", productsDataModelArrayList.get(position).getProductName());
+        intent.putExtra("productPrice", productsDataModelArrayList.get(position).getProductPrice());
+        intent.putExtra("productDesc", productsDataModelArrayList.get(position).getProductDesc());
+        intent.putExtra("productImg", productsDataModelArrayList.get(position).getProductImage());
         startActivity(intent);
     }
 

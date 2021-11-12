@@ -6,7 +6,7 @@ import android.widget.Toast;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.group.medexpress.AdminInfoDatabaseHelper;
+import com.group.medexpress.SQLite.AdminInfoDatabaseHelper;
 
 import java.util.ArrayList;
 import java.util.List;

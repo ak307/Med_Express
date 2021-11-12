@@ -62,7 +62,7 @@ public class DetailedProductActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detailed_product);
 
 
-        returnBtn = (ImageButton) findViewById(R.id.returnBtn);
+        returnBtn = (ImageButton) findViewById(R.id.detailedProductReturnBtn);
 //        updateBtn = (ImageButton) findViewById(R.id.updateProductBtn);
         productImgView = (ImageView) findViewById(R.id.detailedProductImgView);
         productIDField = (TextView) findViewById(R.id.detailedProductProductID);
@@ -101,11 +101,13 @@ public class DetailedProductActivity extends AppCompatActivity {
     private void setOldProductFields(){
         productIDField.setText(getProductID());
 
-        if (!getProductImg().equals("")) {
+        if (getProductImg() != null && !getProductImg().equals("")) {
             Glide.with(getApplicationContext())
                     .load(getProductImg())
                     .into(productImgView);
         }
+        else
+            Toast.makeText(DetailedProductActivity.this, "product image is null", Toast.LENGTH_SHORT).show();
 
         productNameField.setText(getProductName());
         productPriceField.setText(getProductPrice());
