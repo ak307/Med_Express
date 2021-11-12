@@ -7,7 +7,7 @@
     tools:context=".DetailedProductActivity">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/detailedLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -68,13 +68,13 @@
 
 
             <ImageView
-                android:id="@+id/updateProductImgView"
+                android:id="@+id/detailedProductImgView"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:src="@drawable/android_24" />
 
             <TextView
-                android:id="@+id/updateProductProductID"
+                android:id="@+id/detailedProductProductID"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -86,7 +86,7 @@
                 android:visibility="invisible"/>
 
             <TextView
-                android:id="@+id/updateProductProductName"
+                android:id="@+id/detailedProductProductName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -110,7 +110,7 @@
             android:gravity="center">
 
             <TextView
-                android:id="@+id/updateProductProductPrice"
+                android:id="@+id/detailedProductProductPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/round_border"
@@ -122,7 +122,7 @@
                 android:textSize="16sp" />
 
             <Spinner
-                android:id="@+id/updateProductDropDown"
+                android:id="@+id/detailedProductDropDown"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:drawable/btn_dropdown"
@@ -148,7 +148,7 @@
 
 
             <TextView
-                android:id="@+id/updateProductProductDescription"
+                android:id="@+id/detailedProductProductDescription"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_gravity="center"
@@ -163,7 +163,7 @@
 
 
             <TextView
-                android:id="@+id/updateProductErrorText"
+                android:id="@+id/detailedProductErrorText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
@@ -180,7 +180,7 @@
 
 
     <ProgressBar
-        android:id="@+id/updateProductProgressBar"
+        android:id="@+id/detailedProductProgressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
