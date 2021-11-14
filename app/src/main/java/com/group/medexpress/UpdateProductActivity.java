@@ -354,23 +354,23 @@ public class UpdateProductActivity extends AppCompatActivity {
     }
 
     private String getProductName(){
-        String productID = getIntent().getStringExtra("productName");
-        return productID;
+        String productName = getIntent().getStringExtra("productName");
+        return productName;
     }
 
     private String getProductPrice(){
-        String productID = getIntent().getStringExtra("productPrice");
-        return productID;
+        String productPrice = getIntent().getStringExtra("productPrice");
+        return productPrice;
     }
 
     private String getProductDesc(){
-        String productID = getIntent().getStringExtra("productDesc");
-        return productID;
+        String productDesc = getIntent().getStringExtra("productDesc");
+        return productDesc;
     }
 
     private String getProductImg(){
-        String productID = getIntent().getStringExtra("productImg");
-        return productID;
+        String productImg = getIntent().getStringExtra("productImg");
+        return productImg;
     }
 
 }

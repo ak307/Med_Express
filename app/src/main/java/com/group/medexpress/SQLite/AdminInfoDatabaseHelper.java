@@ -1,4 +1,4 @@
-package com.group.medexpress;
+package com.group.medexpress.SQLite;
 
 import android.content.ContentValues;
 import android.content.Context;
