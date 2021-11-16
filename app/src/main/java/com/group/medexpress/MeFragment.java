@@ -21,7 +21,6 @@ public class MeFragment extends Fragment {
     private Button loginBtn;
     private LinearLayout cart;
     private LinearLayout wishList;
-    private LinearLayout myRating;
     private LinearLayout trackOrderDelivery;
     private LinearLayout purchasedHistory;
     private Utils utils;
@@ -39,7 +38,6 @@ public class MeFragment extends Fragment {
         loginBtn = (Button) view.findViewById(R.id.meLogInBtn);
         cart = (LinearLayout) view.findViewById(R.id.cartLLayout);
         wishList = (LinearLayout) view.findViewById(R.id.wishListLLayout);
-        myRating = (LinearLayout) view.findViewById(R.id.myRatingLLayout);
         trackOrderDelivery = (LinearLayout) view.findViewById(R.id.trackOrderLLayout);
         purchasedHistory = (LinearLayout) view.findViewById(R.id.purchaseHistoryLLayout);
 
@@ -59,7 +57,6 @@ public class MeFragment extends Fragment {
         setLogoutBtn();
         setCart();
         setWishList();
-        setMyRating();
         setTrackOrderDelivery();
         setPurchasedHistory();
 
@@ -96,9 +93,14 @@ public class MeFragment extends Fragment {
         cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                sendToshopCartActivity();
             }
         });
+    }
+
+    private void sendToshopCartActivity() {
+        Intent intent = new Intent(getContext(), shopCartActivity.class);
+        startActivity(intent);
     }
 
 
@@ -106,19 +108,14 @@ public class MeFragment extends Fragment {
         wishList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                sendToWishListPageActivity();
             }
         });
     }
 
-
-    private void setMyRating(){
-        myRating.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+    private void sendToWishListPageActivity() {
+        Intent intent = new Intent(getContext(), WishListPageActivity.class);
+        startActivity(intent);
     }
 
 
@@ -126,9 +123,14 @@ public class MeFragment extends Fragment {
         trackOrderDelivery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                sendToTrackOrderDeliveryActivity();
             }
         });
+    }
+
+    private void sendToTrackOrderDeliveryActivity() {
+        Intent intent = new Intent(getContext(), TrackOrderDeliveryActivity.class);
+        startActivity(intent);
     }
 
 
@@ -136,9 +138,14 @@ public class MeFragment extends Fragment {
         purchasedHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                sendToViewPurchasedHistoryActivity();
             }
         });
+    }
+
+    private void sendToViewPurchasedHistoryActivity() {
+        Intent intent = new Intent(getContext(), ViewPurchasedHistoryActivity.class);
+        startActivity(intent);
     }
 
 
