@@ -41,7 +41,6 @@ import java.util.HashMap;
 
 public class DetailedProductActivity extends AppCompatActivity {
     private ImageButton returnBtn;
-//    private ImageButton updateBtn;
     private ImageView productImgView;
     private TextView productIDField;
     private TextView productNameField;
@@ -63,7 +62,6 @@ public class DetailedProductActivity extends AppCompatActivity {
 
 
         returnBtn = (ImageButton) findViewById(R.id.detailedProductReturnBtn);
-//        updateBtn = (ImageButton) findViewById(R.id.updateProductBtn);
         productImgView = (ImageView) findViewById(R.id.detailedProductImgView);
         productIDField = (TextView) findViewById(R.id.detailedProductProductID);
         productNameField = (TextView) findViewById(R.id.detailedProductProductName);
@@ -90,8 +88,7 @@ public class DetailedProductActivity extends AppCompatActivity {
 
 
         setReturnBtn();
-//        setUpdateBtn();
-        setProductImgView();
+//        setProductImgView();
         setOldProductFields();
 
 
@@ -125,185 +122,31 @@ public class DetailedProductActivity extends AppCompatActivity {
         });
     }
 
-
-//    private void setUpdateBtn(){
-//        updateBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String productID = productIDField.getText().toString().trim();
-//                String productName = productNameField.getText().toString().trim();
-//                String price = productPriceField.getText().toString().trim();
-//                String desc = productDescField.getText().toString().trim();
-//                String dropdown = dropDown.getSelectedItem().toString();
-//
-//
-//                if(TextUtils.isEmpty(productID)){
-//                    error.setVisibility(View.VISIBLE);
-//                    error.setText("Add Product ID");
-//                }
-//                else if (TextUtils.isEmpty(productName)){
-//                    error.setVisibility(View.VISIBLE);
-//                    error.setText("Add Product Name");
-//                }
-//                else if (TextUtils.isEmpty(price)){
-//                    error.setVisibility(View.VISIBLE);
-//                    error.setText("Add Product's price");
-//                }
-//                else if (price.contains("$")){
-//                    error.setVisibility(View.VISIBLE);
-//                    error.setText("Please do not add $");
-//                }
-//                else if (TextUtils.isEmpty(dropdown)){
-//                    error.setVisibility(View.VISIBLE);
-//                    error.setText("Please select categories");
-//                }
-//                else if (TextUtils.isEmpty(desc)){
-//                    error.setVisibility(View.VISIBLE);
-//                    error.setText("Add Product Description");
-//                }
-//                else if (uri == null){
-//                    error.setVisibility(View.INVISIBLE);
-//                    progressBar.setVisibility(View.VISIBLE);
-//                    addProductToFirebase(getProductImg(), productID, productName, price, desc, dropdown);
-//                }
-//                else {
-//                    error.setVisibility(View.INVISIBLE);
-//                    progressBar.setVisibility(View.VISIBLE);
-//                    setImageToFirebaseStorage(productID, productName, price, desc, dropdown);
-//                }
-//            }
-//        });
-//    }
-
     private void test(){
         //can delete
     }
 
 
-
-
-
-//    private void setImageToFirebaseStorage(String productID,
-//                                           String productName, String price,
-//                                           String desc, String dropdown){
-//
-//        String timestamp = "" + System.currentTimeMillis();
-//        String filePathAndName = "Product_image/" + "img_" + timestamp;
-//
-//
-//        StorageReference storageReference = firebaseStorage.getReference(filePathAndName);
-//
-//        storageReference.putFile(uri)
-//                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//                    @Override
-//                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                        getImageUrl(storageReference, productID, productName, price, desc, dropdown);
-//                    }
-//                }).addOnFailureListener(new OnFailureListener() {
+//    private void setProductImgView(){
+//        productImgView.setOnClickListener(new View.OnClickListener() {
 //            @Override
-//            public void onFailure(@NonNull @NotNull Exception e) {
-//                progressBar.setVisibility(View.INVISIBLE);
+//            public void onClick(View v) {
+//                String permission = Manifest.permission.READ_EXTERNAL_STORAGE;
+//                if(ContextCompat.checkSelfPermission(DetailedProductActivity.this, permission)
+//                        != PackageManager.PERMISSION_GRANTED){
+//
+//                    String[] permissions = {permission};
+//                    ActivityCompat.requestPermissions(DetailedProductActivity.this, permissions, 1);
+//                }
+//                else {
+//                    CropImage.activity()
+//                            .setGuidelines(CropImageView.Guidelines.ON)
+//                            .start(DetailedProductActivity.this);
+//
+//                }
 //            }
 //        });
-//
 //    }
-
-
-//    private void getImageUrl(StorageReference image_path, String productID,
-//                             String productName, String price,
-//                             String desc, String dropdown){
-//        image_path.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//            @Override
-//            public void onSuccess(Uri uri) {
-//                addProductToFirebase(uri.toString(), productID, productName, price, desc, dropdown);
-//            }
-//        });
-//
-//    }
-
-
-//    private void addProductToFirebase(String uri, String productID,
-//                                      String productName, String price,
-//                                      String desc, String dropdown){
-//        categoriesList.add(dropdown);
-//
-//
-//        HashMap<String, Object> dataMap = new HashMap<>();
-//        dataMap.put("id", getProductDocID());
-//        dataMap.put("productID", getProductID());
-//        dataMap.put("name", productName);
-//        dataMap.put("price", price);
-//        dataMap.put("description", desc);
-//        dataMap.put("image_url", uri);
-//        dataMap.put("Category", categoriesList);
-//
-//
-//
-//        firebaseFirestore.collection("Products")
-//                .document(getProductDocID())
-//                .update(dataMap)
-//                .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Void> task) {
-//                        if (task.isSuccessful()){
-//                            onBackPressed();
-//                        }
-//                    }
-//                });
-
-//        firebaseStorage.getReference().addValueEventListener(new ValueEventListener(){
-//
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                progressBar.setVisibility(View.GONE);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        })
-
-//        firebaseFirestore.collection("Products")
-//                .document(docId)
-//                .set(dataMap)
-//                .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Void> task) {
-//                        if(task.isSuccessful()){
-//                            onBackPressed();
-//                        }
-//                        else
-//                            progressBar.setVisibility(View.INVISIBLE);
-//
-//                    }
-//                });
-//    }
-
-
-    private void setProductImgView(){
-        productImgView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String permission = Manifest.permission.READ_EXTERNAL_STORAGE;
-                if(ContextCompat.checkSelfPermission(DetailedProductActivity.this, permission)
-                        != PackageManager.PERMISSION_GRANTED){
-
-                    String[] permissions = {permission};
-                    ActivityCompat.requestPermissions(DetailedProductActivity.this, permissions, 1);
-                }
-                else {
-                    CropImage.activity()
-                            .setGuidelines(CropImageView.Guidelines.ON)
-                            .start(DetailedProductActivity.this);
-
-                }
-            }
-        });
-    }
-
-
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -325,9 +168,6 @@ public class DetailedProductActivity extends AppCompatActivity {
         }
 
     }
-
-
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull @NotNull String[] permissions, @NonNull @NotNull int[] grantResults) {
