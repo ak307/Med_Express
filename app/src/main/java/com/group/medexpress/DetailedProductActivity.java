@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -26,11 +27,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.group.medexpress.Datamodels.ProductsDataModel;
+import com.group.medexpress.Utils.Utils;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -54,6 +57,9 @@ public class DetailedProductActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private Spinner dropDown;
 
+    private Button addWishlistBtn;
+    private Utils utils;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +77,8 @@ public class DetailedProductActivity extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.detailedProductProgressBar);
         dropDown = (Spinner) findViewById(R.id.detailedProductDropDown);
 
+        addWishlistBtn = (Button) findViewById(R.id.addWishlistBtn);
+        utils = new Utils();
 
         error.setVisibility(View.INVISIBLE);
         progressBar.setVisibility(View.INVISIBLE);
@@ -90,7 +98,7 @@ public class DetailedProductActivity extends AppCompatActivity {
         setReturnBtn();
 //        setProductImgView();
         setOldProductFields();
-
+        setAddWishListBtn();
 
     }
 
@@ -147,6 +155,24 @@ public class DetailedProductActivity extends AppCompatActivity {
 //            }
 //        });
 //    }
+
+    public void setAddWishListBtn(){
+        addWishlistBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                firebaseFirestore.collection("customers")
+                        .document(utils.getUserID())
+                        .update("favorite_products", FieldValue.arrayUnion(getProductDocID()))
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Toast.makeText(DetailedProductActivity.this, "Add to Wishlist successfully", Toast.LENGTH_LONG).show();
+                            }
+                        });
+            }
+        });
+    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
