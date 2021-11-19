@@ -17,13 +17,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MedExpress">
         <activity
+            android:name=".ViewPurchasedHistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TrackOrderDeliveryActivity"
+            android:exported="false" />
+        <activity
             android:name=".shopCartActivity"
             android:exported="true" />
         <activity
             android:name=".PaymentActivity"
             android:exported="true" />
         <activity
-            android:name=".Logout"
+            android:name=".LogOutActivity"
             android:exported="true" />
         <activity
             android:name=".WishListPageActivity"

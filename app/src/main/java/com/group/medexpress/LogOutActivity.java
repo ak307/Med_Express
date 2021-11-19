@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
-public class Logout extends AppCompatActivity {
+public class LogOutActivity extends AppCompatActivity {
 
     private ImageButton logoutBackBtn;
     private ImageButton logoutCancelBtn;
@@ -50,7 +50,7 @@ public class Logout extends AppCompatActivity {
     }
 
     private void sendToLoginActivity(){
-        Intent intent = new Intent(Logout.this, LogInActivity.class);
+        Intent intent = new Intent(LogOutActivity.this, LogInActivity.class);
         startActivity(intent);
     }
 
