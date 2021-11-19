@@ -62,7 +62,10 @@ public class WishListPageActivity extends AppCompatActivity {
     }
 
     public void GetWishListProducts(ArrayList<String> favorite_product){
-        firebaseFirestore.collection("Products").whereIn("id", favorite_product).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        firebaseFirestore.collection("Products")
+                .whereIn("id", favorite_product)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
