@@ -40,8 +40,8 @@ public class RegisterActivity extends AppCompatActivity {
     private TextView errorText;
     private Utils utils;
     private ArrayList<String> favorite_product;
-//    private ArrayList<String> shop_cart;
-//    private ArrayList<String> payment_history;
+    private ArrayList<String> shop_cart;
+    private ArrayList<String> payment_history;
 
 
     @Override
@@ -64,8 +64,8 @@ public class RegisterActivity extends AppCompatActivity {
         firebaseFirestore = FirebaseFirestore.getInstance();
         utils = new Utils();
         favorite_product = new ArrayList<>();
-//        shop_cart = new ArrayList<>();
-//        payment_history = new ArrayList<>();
+        shop_cart = new ArrayList<>();
+        payment_history = new ArrayList<>();
 
         setLoginNowBtn();
         setCreateBtn();
@@ -161,8 +161,8 @@ public class RegisterActivity extends AppCompatActivity {
         dataMap.put("favorite_products", favorite_product);
         dataMap.put("profile_image", "");
         dataMap.put("uid", utils.getUserID());
-//        dataMap.put("shop_cart", shop_cart);
-//        dataMap.put("payment_history", payment_history);
+        dataMap.put("shop_cart", shop_cart);
+        dataMap.put("payment_history", payment_history);
 
 
         firebaseFirestore.collection("customers").document(utils.getUserID())

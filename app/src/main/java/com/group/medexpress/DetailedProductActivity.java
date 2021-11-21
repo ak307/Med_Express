@@ -58,6 +58,7 @@ public class DetailedProductActivity extends AppCompatActivity {
     private Spinner dropDown;
 
     private Button addWishlistBtn;
+    private Button addCartBtn;
     private Utils utils;
 
 
@@ -78,6 +79,7 @@ public class DetailedProductActivity extends AppCompatActivity {
         dropDown = (Spinner) findViewById(R.id.detailedProductDropDown);
 
         addWishlistBtn = (Button) findViewById(R.id.addWishlistBtn);
+        addCartBtn = (Button) findViewById(R.id.addCartBtn);
         utils = new Utils();
 
         error.setVisibility(View.INVISIBLE);
@@ -99,6 +101,7 @@ public class DetailedProductActivity extends AppCompatActivity {
 //        setProductImgView();
         setOldProductFields();
         setAddWishListBtn();
+        setAddCartBtn();
 
     }
 
@@ -173,6 +176,22 @@ public class DetailedProductActivity extends AppCompatActivity {
         });
     }
 
+    public void setAddCartBtn() {
+        addCartBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                firebaseFirestore.collection("customers")
+                        .document(utils.getUserID())
+                        .update("shop_cart", FieldValue.arrayUnion(getProductDocID()))
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Toast.makeText(DetailedProductActivity.this, "Add to Cart successfully", Toast.LENGTH_LONG).show();
+                            }
+                        });
+            }
+        });
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
