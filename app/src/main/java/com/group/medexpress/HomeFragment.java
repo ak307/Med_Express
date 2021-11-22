@@ -352,6 +352,7 @@ public class HomeFragment extends Fragment {
         });
     }
 
+
     private void sendToDetailedProductActivity(int position){
         Intent intent = new Intent(getContext(), DetailedProductActivity.class);
         intent.putExtra("productDocID", productsDataModelArrayList.get(position).getProductDocID());

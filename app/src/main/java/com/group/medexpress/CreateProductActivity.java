@@ -189,7 +189,8 @@ public class CreateProductActivity extends AppCompatActivity {
     private void getImageUrl(StorageReference image_path, String productID,
                              String productName, String price,
                              String desc, String dropdown){
-        image_path.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        image_path.getDownloadUrl()
+                .addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 addProductToFirebase(uri.toString(), productID, productName, price, desc, dropdown);

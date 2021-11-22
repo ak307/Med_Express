@@ -96,6 +96,7 @@ public class ProductsListviewAdapter extends BaseAdapter {
         return convertView;
     }
 
+
     private void setUpdateBtn(ImageButton updateBtn, int position){
         updateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,6 +112,7 @@ public class ProductsListviewAdapter extends BaseAdapter {
             }
         });
     }
+
 
     private void setDeleteBtn(ImageButton deleteBtn, int position){
         deleteBtn.setOnClickListener(new View.OnClickListener() {

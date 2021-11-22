@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -100,9 +101,18 @@ public class DetailedProductActivity extends AppCompatActivity {
         setReturnBtn();
 //        setProductImgView();
         setOldProductFields();
-        setAddWishListBtn();
-        setAddCartBtn();
+        if (!isGuestUser()){
+            setAddWishListBtn();
+            setAddCartBtn();
+        }
+        else
+            Toast.makeText(DetailedProductActivity.this, "Please Sign in first.", Toast.LENGTH_SHORT).show();
+        
 
+    }
+    
+    private boolean isGuestUser(){
+        return utils.getUserID() == null;
     }
 
 
@@ -176,6 +186,7 @@ public class DetailedProductActivity extends AppCompatActivity {
         });
     }
 
+
     public void setAddCartBtn() {
         addCartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -183,15 +194,26 @@ public class DetailedProductActivity extends AppCompatActivity {
                 firebaseFirestore.collection("customers")
                         .document(utils.getUserID())
                         .update("shop_cart", FieldValue.arrayUnion(getProductDocID()))
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
-                            public void onSuccess(Void unused) {
-                                Toast.makeText(DetailedProductActivity.this, "Add to Cart successfully", Toast.LENGTH_LONG).show();
+                            public void onComplete(@NonNull Task<Void> task) {
+                               if (task.isSuccessful()){
+                                   Toast.makeText(DetailedProductActivity.this, "Add to Cart successfully", Toast.LENGTH_LONG).show();
+
+                               }
                             }
                         });
+
+//                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                            @Override
+//                            public void onSuccess(Void unused) {
+//                                Toast.makeText(DetailedProductActivity.this, "Add to Cart successfully", Toast.LENGTH_LONG).show();
+//                            }
+//                        });
             }
         });
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -213,6 +235,7 @@ public class DetailedProductActivity extends AppCompatActivity {
         }
 
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull @NotNull String[] permissions, @NonNull @NotNull int[] grantResults) {
