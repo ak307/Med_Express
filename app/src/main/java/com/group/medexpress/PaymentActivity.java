@@ -16,6 +16,7 @@ public class PaymentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_payment);
 
         totalAmountText = (TextView) findViewById(R.id.totalAmountText);
+        totalAmountText.setText(getTotalCost());
 
         Toast.makeText(PaymentActivity.this, ": " + getTotalCost(), Toast.LENGTH_SHORT).show();
     }
