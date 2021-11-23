@@ -11,4 +11,9 @@ public class PaymentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
     }
+
+    private String getTotalCost(){
+        String totalCost = getIntent().getStringExtra("totalCost");
+        return totalCost;
+    }
 }

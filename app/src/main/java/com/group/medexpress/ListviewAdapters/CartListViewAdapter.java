@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.group.medexpress.Datamodels.cartDataModel;
+import com.group.medexpress.PaymentActivity;
 import com.group.medexpress.R;
 import com.group.medexpress.Utils.Checker;
 import com.group.medexpress.Utils.Utils;
@@ -41,14 +42,17 @@ public class CartListViewAdapter extends BaseAdapter {
     private TextView total;
     private FirebaseFirestore firebaseFirestore;
     private Utils utils;
+    private Button goToPayBtn;
 
 
 
 
-    public CartListViewAdapter(Context context, ArrayList<cartDataModel> list, TextView total) {
+    public CartListViewAdapter(Context context, ArrayList<cartDataModel> list,
+                               TextView total, Button goToPayBtn) {
         this.context = context;
         this.list = list;
         this.total = total;
+        this.goToPayBtn = goToPayBtn;
     }
 
     @Override
@@ -106,6 +110,7 @@ public class CartListViewAdapter extends BaseAdapter {
         setReduceBtn(qtyReduceBtn, position, productQty);
         setPlusBtn(qtyPlusBtn, position, productQty);
         setDeleteBtn(deleteCartProductBtn, position);
+        setGoToPayBtn();
 
         return convertView;
 
@@ -199,6 +204,12 @@ public class CartListViewAdapter extends BaseAdapter {
                         });
             }
         });
+    }
+
+    private void setGoToPayBtn(){
+        Intent intent = new Intent(context, PaymentActivity.class);
+        intent.putExtra("totalCost", sum);
+        context.startActivity(intent);
     }
 
 

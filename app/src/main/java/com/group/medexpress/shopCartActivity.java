@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Adapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -38,6 +39,7 @@ public class shopCartActivity extends AppCompatActivity {
     private TextView totalCost;
     private double sum = 0;
     private ImageButton cartBackBtn;
+    private Button goToPayBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,7 @@ public class shopCartActivity extends AppCompatActivity {
         cartListView = (ListView) findViewById(R.id.cartListView);
         totalCost = (TextView) findViewById(R.id.totalCost);
         cartBackBtn = (ImageButton) findViewById(R.id.cartBackBtn);
+        goToPayBtn = (Button) findViewById(R.id.goToPayBtn);
 
         arraylist = new ArrayList<>();
         utils = new Utils();
@@ -126,7 +129,7 @@ public class shopCartActivity extends AppCompatActivity {
 
 
     public void setAdapter() {
-        Adapter = new CartListViewAdapter(shopCartActivity.this, arraylist, totalCost);
+        Adapter = new CartListViewAdapter(shopCartActivity.this, arraylist, totalCost, goToPayBtn);
         cartListView.setAdapter(Adapter);
         Adapter.notifyDataSetChanged();
     }
