@@ -3,8 +3,11 @@ package com.group.medexpress;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.media.Image;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Adapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -30,6 +33,7 @@ public class WishListPageActivity extends AppCompatActivity {
     private ArrayList<ProductsDataModel> arraylist;
     private FirebaseFirestore firebaseFirestore;
     private Utils utils;
+    private ImageButton wishlistBackBtn;
 
 
     @Override
@@ -40,6 +44,7 @@ public class WishListPageActivity extends AppCompatActivity {
         WishListListView = (ListView) findViewById(R.id.WishListListView);
         arraylist = new ArrayList<>();
         utils = new Utils();
+        wishlistBackBtn = (ImageButton) findViewById(R.id.wishlistBackBtn);
 
         firebaseFirestore = FirebaseFirestore.getInstance();
 
@@ -59,6 +64,17 @@ public class WishListPageActivity extends AppCompatActivity {
                     }
                 });
 
+        wishlistBackBtn();
+
+    }
+
+    private void wishlistBackBtn(){
+        wishlistBackBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     public void GetWishListProducts(ArrayList<String> favorite_product){
