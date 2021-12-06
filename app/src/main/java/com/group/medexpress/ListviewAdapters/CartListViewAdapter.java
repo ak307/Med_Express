@@ -209,12 +209,14 @@ public class CartListViewAdapter extends BaseAdapter {
     private void setGoToPayBtn(){
         goToPayBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 Intent intent = new Intent(context, PaymentActivity.class);
-                intent.putExtra("totalCost", String.valueOf(sum));
+                intent.putExtra("totalCost", sum);
                 context.startActivity(intent);
             }
         });
+
     }
+
 
 }

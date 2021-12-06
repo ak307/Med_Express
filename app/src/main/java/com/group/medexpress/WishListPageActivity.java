@@ -48,6 +48,8 @@ public class WishListPageActivity extends AppCompatActivity {
 
         firebaseFirestore = FirebaseFirestore.getInstance();
 
+
+
         firebaseFirestore.collection("customers")
                 .document(utils.getUserID())
                 .get()
@@ -58,7 +60,8 @@ public class WishListPageActivity extends AppCompatActivity {
                             DocumentSnapshot documentSnapshots = task.getResult();
                             if (documentSnapshots.exists()) {
                                 ArrayList<String> favorite_product = (ArrayList<String>) documentSnapshots.get("favorite_products");
-                                GetWishListProducts(favorite_product);
+                                if(!favorite_product.isEmpty())
+                                    GetWishListProducts(favorite_product);
                             }
                         }
                     }

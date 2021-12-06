@@ -101,13 +101,9 @@ public class DetailedProductActivity extends AppCompatActivity {
         setReturnBtn();
 //        setProductImgView();
         setOldProductFields();
-        if (!isGuestUser()){
-            setAddWishListBtn();
-            setAddCartBtn();
-        }
-        else
-            Toast.makeText(DetailedProductActivity.this, "Please Sign in first.", Toast.LENGTH_SHORT).show();
-        
+
+        setAddWishListBtn();
+        setAddCartBtn();
 
     }
     
@@ -173,15 +169,19 @@ public class DetailedProductActivity extends AppCompatActivity {
         addWishlistBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                firebaseFirestore.collection("customers")
-                        .document(utils.getUserID())
-                        .update("favorite_products", FieldValue.arrayUnion(getProductDocID()))
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                Toast.makeText(DetailedProductActivity.this, "Add to Wishlist successfully", Toast.LENGTH_LONG).show();
-                            }
-                        });
+                if (!isGuestUser()){
+                    firebaseFirestore.collection("customers")
+                            .document(utils.getUserID())
+                            .update("favorite_products", FieldValue.arrayUnion(getProductDocID()))
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(DetailedProductActivity.this, "Add to Wishlist successfully", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                }
+                else
+                    Toast.makeText(DetailedProductActivity.this, "Please Sign in first.", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -191,25 +191,24 @@ public class DetailedProductActivity extends AppCompatActivity {
         addCartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                firebaseFirestore.collection("customers")
-                        .document(utils.getUserID())
-                        .update("shop_cart", FieldValue.arrayUnion(getProductDocID()))
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                               if (task.isSuccessful()){
-                                   Toast.makeText(DetailedProductActivity.this, "Add to Cart successfully", Toast.LENGTH_LONG).show();
+                if (!isGuestUser()){
+                    firebaseFirestore.collection("customers")
+                            .document(utils.getUserID())
+                            .update("shop_cart", FieldValue.arrayUnion(getProductDocID()))
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()){
+                                        Toast.makeText(DetailedProductActivity.this, "Add to Cart successfully", Toast.LENGTH_LONG).show();
 
-                               }
-                            }
-                        });
+                                    }
+                                }
+                            });
 
-//                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                            @Override
-//                            public void onSuccess(Void unused) {
-//                                Toast.makeText(DetailedProductActivity.this, "Add to Cart successfully", Toast.LENGTH_LONG).show();
-//                            }
-//                        });
+                }
+                else
+                    Toast.makeText(DetailedProductActivity.this, "Please Sign in first.", Toast.LENGTH_SHORT).show();
+
             }
         });
     }

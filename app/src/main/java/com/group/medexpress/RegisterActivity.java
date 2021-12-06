@@ -166,7 +166,8 @@ public class RegisterActivity extends AppCompatActivity {
         dataMap.put("payment_history", payment_history);
 
 
-        firebaseFirestore.collection("customers").document(utils.getUserID())
+        firebaseFirestore.collection("customers")
+                .document(utils.getUserID())
                 .set(dataMap).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {

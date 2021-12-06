@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.group.medexpress.Utils.Utils;
@@ -66,6 +67,11 @@ public class MeFragment extends Fragment {
         return view;
     }
 
+    private boolean isGuestUser(){
+        return utils.getUserID() == null;
+    }
+
+
 
     private void setLoginBtn(){
         loginBtn.setOnClickListener(new View.OnClickListener() {
@@ -108,7 +114,12 @@ public class MeFragment extends Fragment {
         wishList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendToWishListPageActivity();
+                if (!isGuestUser()){
+                    sendToWishListPageActivity();
+                }
+                else
+                    Toast.makeText(getActivity(), "Please Sign in first.", Toast.LENGTH_SHORT).show();
+
             }
         });
     }
@@ -123,7 +134,12 @@ public class MeFragment extends Fragment {
         trackOrderDelivery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendToTrackOrderDeliveryActivity();
+                if (!isGuestUser()){
+                    sendToTrackOrderDeliveryActivity();
+                }
+                else
+                    Toast.makeText(getActivity(), "Please Sign in first.", Toast.LENGTH_SHORT).show();
+
             }
         });
     }
@@ -138,7 +154,13 @@ public class MeFragment extends Fragment {
         purchasedHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendToViewPurchasedHistoryActivity();
+                if (!isGuestUser()){
+                    sendToViewPurchasedHistoryActivity();
+
+                }
+                else
+                    Toast.makeText(getActivity(), "Please Sign in first.", Toast.LENGTH_SHORT).show();
+
             }
         });
     }
