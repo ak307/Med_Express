@@ -18,6 +18,7 @@ public class TrackOrderDeliveryActivity extends AppCompatActivity {
 
         trackOrderBackBtn = (ImageButton) findViewById(R.id.trackOrderBackBtn);
 
+        setTrackOrderBackBtn();
     }
 
     private void setTrackOrderBackBtn(){

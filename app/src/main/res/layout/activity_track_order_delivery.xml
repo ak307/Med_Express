@@ -39,7 +39,7 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="20dp"
                 android:layout_weight="0.8"
-                android:text="Track Order Dlicry"
+                android:text="Track Your Order Delivery"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"

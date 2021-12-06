@@ -17,6 +17,7 @@ public class ViewPurchasedHistoryActivity extends AppCompatActivity {
 
         purchaseHistoryBtn = (ImageButton) findViewById(R.id.purchaseHistoryBtn);
 
+        setPurchaseHistoryBtn();
     }
 
     private void setPurchaseHistoryBtn(){
