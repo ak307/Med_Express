@@ -11,12 +11,19 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.group.medexpress.Datamodels.ProductsDataModel;
 import com.group.medexpress.DeleteProductActivity;
 import com.group.medexpress.R;
 import com.group.medexpress.UpdateProductActivity;
 import com.group.medexpress.Utils.Checker;
+import com.group.medexpress.Utils.Utils;
 
 import java.util.ArrayList;
 
@@ -24,6 +31,8 @@ public class WishListListViewAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<ProductsDataModel> list;
     private Checker checker;
+    private FirebaseFirestore firebaseFirestore;
+    private Utils utils;
 
     public WishListListViewAdapter(Context context, ArrayList<ProductsDataModel> list) {
         this.context = context;
@@ -62,6 +71,8 @@ public class WishListListViewAdapter extends BaseAdapter {
         ImageButton deleteBtn = (ImageButton) convertView.findViewById(R.id.deleteBtn);
 
         checker = new Checker(context);
+        utils = new Utils();
+        firebaseFirestore = FirebaseFirestore.getInstance();
 
 
 
@@ -77,8 +88,30 @@ public class WishListListViewAdapter extends BaseAdapter {
 
 //        setDeleteBtn(deleteBtn, position);
         updateBtn.setVisibility(View.INVISIBLE);
+        setDeleteBtn(deleteBtn, position);
 
         return convertView;
+    }
+
+    private void setDeleteBtn(ImageButton deleteBtn, int position){
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String docID = list.get(position).getProductDocID();
+                firebaseFirestore.collection("customers")
+                        .document(utils.getUserID())
+                        .update("favorite_products", FieldValue.arrayRemove(docID))
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()){
+                                    notifyDataSetChanged();
+                                    // success
+                                }
+                            }
+                        });
+            }
+        });
     }
 
 //    private void setDeleteBtn(ImageButton deleteBtn, int position){
