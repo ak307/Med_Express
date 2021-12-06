@@ -62,6 +62,8 @@ public class DetailedProductActivity extends AppCompatActivity {
     private Button addCartBtn;
     private Utils utils;
 
+    private Button btnSubmit;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +88,8 @@ public class DetailedProductActivity extends AppCompatActivity {
         error.setVisibility(View.INVISIBLE);
         progressBar.setVisibility(View.INVISIBLE);
 
+        btnSubmit = (Button) findViewById(R.id.btnSubmit);
+
 
         String[] items = new String[]{"surgical ", "alcohol", "test kit"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
@@ -104,6 +108,7 @@ public class DetailedProductActivity extends AppCompatActivity {
 
         setAddWishListBtn();
         setAddCartBtn();
+        setSubmitBtn();
 
     }
     
@@ -209,6 +214,16 @@ public class DetailedProductActivity extends AppCompatActivity {
                 else
                     Toast.makeText(DetailedProductActivity.this, "Please Sign in first.", Toast.LENGTH_SHORT).show();
 
+            }
+        });
+    }
+
+    private void setSubmitBtn(){
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DetailedProductActivity.this, MainActivity.class);
+                Toast.makeText(DetailedProductActivity.this, "Your feedback sent!" , Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -33,7 +33,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="20dp"
             android:layout_weight="0.8"
-            android:text="make payment of the cart"
+            android:text="Make payment of the cart"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -54,7 +54,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="20dp"
@@ -66,7 +66,7 @@
 
         <TextView
             android:id="@+id/totalAmountText"
-            android:layout_width="210dp"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="5dp"
@@ -80,7 +80,7 @@
     <LinearLayout
         android:id="@+id/linearLayout5"
         android:layout_width="match_parent"
-        android:layout_height="320dp"
+        android:layout_height="250dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/layout_frame"
@@ -105,63 +105,35 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
-            android:text="Bank Name:"
+            android:text="Bank: Private Bank Ltd"
             android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/bankEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="40dp"
-            android:background="@drawable/layout_frame"
-            android:minHeight="48dp"
-            tools:ignore="SpeakableTextPresentCheck" />
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
-            android:text="Account Name:"
+            android:text="Account Name: Health Mate"
             android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/accountEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="40dp"
-            android:background="@drawable/layout_frame"
-            android:minHeight="48dp"
-            tools:ignore="SpeakableTextPresentCheck" />
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
-            android:text="Account Number:"
+            android:text="Account Number: 666666888888"
             android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textSize="20sp" />
 
-        <EditText
-            android:id="@+id/numberEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="40dp"
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="330dp"
+            android:layout_marginTop="35dp"
             android:background="@drawable/layout_frame"
-            android:minHeight="48dp"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+            tools:ignore="SpeakableTextPresentCheck" />
 
     </LinearLayout>
 
@@ -189,12 +161,13 @@
             android:textStyle="bold" />
 
         <ImageButton
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="300dp"
-            android:layout_marginTop="15dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="330dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/layout_frame"
             tools:ignore="SpeakableTextPresentCheck" />
+
     </LinearLayout>
 
     <Button
@@ -203,10 +176,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="25dp"
-        android:text="Payment"
+        android:text="Make payment"
         android:textColor="@color/black"
         android:textSize="20sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

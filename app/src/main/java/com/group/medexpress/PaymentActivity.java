@@ -27,7 +27,8 @@ public class PaymentActivity extends AppCompatActivity {
         totalAmountText = (TextView) findViewById(R.id.totalAmountText);
         totalAmountText.setText(getTotalCost());
 
-
+        setPaymentBackBtn();
+        setPaymentBtn();
     }
 
     private String getTotalCost(){
@@ -39,7 +40,7 @@ public class PaymentActivity extends AppCompatActivity {
         paymentBackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(PaymentActivity.this, shopCartActivity.class);
+                onBackPressed();
             }
         });
     }
