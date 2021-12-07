@@ -125,7 +125,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                android:text="On-Going Delivry"
+                android:text="On-Going Delivery"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
@@ -154,7 +154,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                android:text="Order Delivry Arrival"
+                android:text="Order Delivery Arrival"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
