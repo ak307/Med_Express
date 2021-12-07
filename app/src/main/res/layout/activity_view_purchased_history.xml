@@ -67,21 +67,21 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="OrderID: 7s5d8v8e"
+                    android:text=" OrderID: 7s5d8v8e"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Date: 04/10/2021"
+                    android:text=" Date: 04/10/2021"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Total Cost: $27"
+                    android:text=" Total Cost: $27"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -114,21 +114,21 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="OrderID: 2a4r3v7k"
+                    android:text=" OrderID: 2a4r3v7k"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Date: 13/10/2021"
+                    android:text=" Date: 13/10/2021"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Total Cost: $13"
+                    android:text=" Total Cost: $13"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -161,21 +161,21 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="OrderID: 6r3d4t9w"
+                    android:text=" OrderID: 6r3d4t9w"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Date: 27/10/2021"
+                    android:text=" Date: 27/10/2021"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Total Cost: $32"
+                    android:text=" Total Cost: $32"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -208,21 +208,21 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="OrderID: 4d8s9c1s"
+                    android:text=" OrderID: 4d8s9c1s"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Date: 12/11/2021"
+                    android:text=" Date: 12/11/2021"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Total Cost: $28"
+                    android:text=" Total Cost: $28"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -255,21 +255,21 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="OrderID: 5o9k3l1n"
+                    android:text=" OrderID: 5o9k3l1n"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Date: 29/11/2021"
+                    android:text=" Date: 29/11/2021"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Total Cost: $11"
+                    android:text=" Total Cost: $11"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
             </LinearLayout>
